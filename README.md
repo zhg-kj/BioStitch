@@ -22,6 +22,7 @@ Below is how the order of the images will be stitched together. If you make no c
 ```
 
 Below is a tutorial of how to use this tool.
+
 https://user-images.githubusercontent.com/67027837/209880391-b27aabf6-9479-481a-8fdb-3d029085b843.mp4
 
 ## Troubleshooting
