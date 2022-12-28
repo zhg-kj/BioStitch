@@ -24,6 +24,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/**
+ * This function allows users to upload a folder of subfolders containing images to be stitched
+ * and then saves the stitched images to another user selected folder. It assumes that each subfolder with
+ * images that need to be stitched begins with the naming convention "XY".
+ *
+ * It does so by:
+ *      1. Prompting the user to choose a folder containing the subfolders with images they want stitched.
+ *      2. Prompting the user to choose a folder to save stitched images to.
+ *      3. Calling on the stitchFolder helper function on each subfolder in the selected folder.
+ *
+ * @author Kai Jun Zhuang
+ */
 void MainWindow::uploadRawFolder()
 {
     // Show a file dialog to select the folder containing the images to stitch
@@ -40,9 +52,11 @@ void MainWindow::uploadRawFolder()
         return;
     }
 
+    // Get all subfolders in folderPath
     QDir folder(folderPath);
     QStringList subfolders = folder.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
+    // Filter through each subfolder and only call stitchFolder on the ones including XY
     foreach (QString subfolder, subfolders)
     {
         if (subfolder.contains("XY")) {
@@ -53,6 +67,17 @@ void MainWindow::uploadRawFolder()
     }
 }
 
+/**
+ * This function is a helper function for uploadRawFolder. It takes in a subfolder, sorts images into
+ * appropriate lists, and then calls the stitchImage helper function on the images. It assumes that the
+ * subfolder passed to it contains 4 channels with naming conventions CH1, CH2, CH3, and CH4, and that
+ * there exists an overlay of all channels with naming convention Overlay.
+ *
+ * @author Kai Jun Zhuang
+ * @param folderPath The path to the subfolder passed in uploadRawFolder.
+ * @param savePath The path to save stitched images to.
+ * @param fileName The name of the subfolder to be used in naming the stitched images.
+ */
 void MainWindow::stitchFolder(QString folderPath, QString savePath, QString fileName)
 {
     // Get a list of all .tif files in the selected folder
@@ -62,6 +87,7 @@ void MainWindow::stitchFolder(QString folderPath, QString savePath, QString file
     folder.setNameFilters(filters);
     QStringList tifFiles = folder.entryList(QDir::Files);
 
+    // Initialize lists
     QStringList ch1;
     QStringList ch2;
     QStringList ch3;
@@ -91,8 +117,19 @@ void MainWindow::stitchFolder(QString folderPath, QString savePath, QString file
     stitchImages(overlay, savePath, fileName + "_Overlay");
 }
 
+/**
+ * This function is a helper function for the stitchFolder function. It takes a list of images,
+ * ensures that there are 9 images, stitches the 9 images together, and then saves the images to
+ * the savePath.
+ *
+ * @author Kai Jun Zhuang
+ * @param fileNames A list of the file paths to each image.
+ * @param savePath The path to save stitched images to.
+ * @param fileName The name for the saved image.
+ */
 void MainWindow::stitchImages(QStringList fileNames, QString savePath, QString fileName)
 {
+    // Check if there are 9 images in the fileNames list, if not return an error to console
     if (fileNames.size() == 9) {
         // Load the images
         QImage image1(fileNames[0]);
@@ -133,7 +170,8 @@ void MainWindow::stitchImages(QStringList fileNames, QString savePath, QString f
         // Save the image to the selected file
         image.save(filePath);
     } else {
-        qDebug() << "Missing images for " + fileName + " please ensure there are 9 images to complete the stitch.";
+        // There were fewer/more than 9 images for the respective channel so log an error message
+        qDebug() << "Missing images for " + fileName + " please ensure there are exactly 9 images to complete the stitch.";
         return;
     }
 }
