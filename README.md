@@ -2,7 +2,7 @@
 A tool for stitching bioinformatics image data together. Created by Kai Jun Zhuang for Dr. Yunhe Feng at The Responsible AI Lab.
 
 ## Usage
-To use the application, download the deployed version from https://www.dropbox.com/sh/2zhn6qsganposnx/AACSZFWr6mPQxTXr-VC8ahiya?dl=0, open the folder and click on the BioStitch.exe file to open the application.
+To use the application, download the deployed version from https://www.dropbox.com/sh/2zhn6qsganposnx/AACSZFWr6mPQxTXr-VC8ahiya?dl=0, extract the zip folder into your desired folder, open the folder and click on the BioStitch.exe file to open the application.
 
 Click on file and then stitch images. You will be prompted to select two folders. The first folder you are prompted to select is the folder that contains the subfolders with naming convention XY. These subfolders should contain the images that need to be stitched. The second folder you are prompted select is where all the stitched images will be saved to.
 
