@@ -62,7 +62,7 @@ void MainWindow::uploadRawFolder()
         if (subfolder.contains("XY")) {
             QString path = folderPath + "/" + subfolder;
 
-            stitchFolder(path, savePath, subfolder);
+            stitchFolder(path, savePath, subfolder.replace(0, 2, "A"));
         }
     }
 }
