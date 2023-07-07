@@ -8,11 +8,11 @@ Click on file and then stitch images. You will be prompted to select two folders
 
 Note that this tool makes several assumptions:
 1. The folder you choose contains subfolders that contain the images to be stitched. These subfolders must contain XY in the name.
-2. The subfolders contain 4 channels (naming convention CH1, CH2, CH3, CH4) and an overlay (naming convention Overlay). There must be 9 images for each channel/overlay. These 9 images will be stitched together to create the stitched image.
+2. The subfolders contain 4 channels (naming convention CH1, CH2, CH3, CH4) and an overlay (naming convention Overlay). There must be 9, 16, or 25 images for each channel/overlay. These images will be stitched together to create the stitched image (3x3, 4x4, or 5x5).
 3. Stitched images are in a .tif file format.
-4. The 9 images are numbered in their file name so that they are ordered. The numbering of these images determine where they will be stitched.
+4. The images are numbered in their file name so that they are ordered. The numbering of these images determine where they will be stitched.
 
-Below is how the order of the images will be stitched together. If you make no changes to the names of the images, it should be correct by default.
+Below is how the order of the images will be stitched together. If you make no changes to the names of the images, it should be correct by default. Note that the example given is for 3x3 images, the same order pattern applies for 4x4 and 5x5.
 
 ```
 1 2 3 
